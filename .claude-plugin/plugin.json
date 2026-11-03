@@ -1,0 +1,10 @@
+{
+  "name": "site-check-skills",
+  "version": "1.0.0",
+  "description": "Real website checks for AI coding agents: AI crawler access (robots.txt plus a real fetch per bot), domain and TLS certificate expiry (registry RDAP), Core Web Vitals from real visitors (PageSpeed Insights). Zero dependencies.",
+  "author": { "name": "Nero Labs", "url": "https://apify.com/nerolabs" },
+  "homepage": "https://github.com/Nero-Engine/site-check-skills",
+  "repository": "https://github.com/Nero-Engine/site-check-skills",
+  "license": "MIT",
+  "keywords": ["seo", "ai-crawlers", "gptbot", "robots-txt", "llms-txt", "domain-expiry", "ssl-expiry", "core-web-vitals", "pagespeed"]
+}

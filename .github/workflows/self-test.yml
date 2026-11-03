@@ -1,0 +1,30 @@
+name: self-test
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+jobs:
+  skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Every skill has name and description frontmatter
+        run: |
+          for f in skills/*/SKILL.md; do
+            d=$(basename "$(dirname "$f")")
+            head -1 "$f" | grep -qx -- '---' || { echo "$f: no frontmatter"; exit 1; }
+            grep -q "^name: $d$" "$f" || { echo "$f: name must be $d"; exit 1; }
+            grep -q "^description: ." "$f" || { echo "$f: no description"; exit 1; }
+          done
+          node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json'));JSON.parse(require('fs').readFileSync('.claude-plugin/plugin.json'))"
+      - name: AI crawler access (report only)
+        run: env -u GITHUB_ACTIONS -u GITHUB_OUTPUT -u GITHUB_STEP_SUMMARY node skills/ai-crawler-access-check/scripts/ai-crawler-access-check.cjs example.com github.com --fail-on none
+      - name: Domain and certificate expiry
+        run: env -u GITHUB_ACTIONS -u GITHUB_OUTPUT -u GITHUB_STEP_SUMMARY node skills/domain-expiry-check/scripts/domain-expiry-check.cjs github.com example.com
+      - name: Core Web Vitals script loads
+        run: env -u GITHUB_ACTIONS -u GITHUB_OUTPUT -u GITHUB_STEP_SUMMARY node skills/core-web-vitals-check/scripts/core-web-vitals-check.cjs --help

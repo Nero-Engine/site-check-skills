@@ -1,0 +1,15 @@
+{
+  "name": "nero-labs",
+  "owner": { "name": "Nero Labs", "url": "https://apify.com/nerolabs" },
+  "metadata": { "description": "Site check skills for AI coding agents: AI crawler access, domain and certificate expiry, Core Web Vitals.", "version": "1.0.0" },
+  "plugins": [
+    {
+      "name": "site-check-skills",
+      "source": "./",
+      "description": "Three real website checks your agent can run: are GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot blocked (robots.txt plus a real fetch), when do the domain and TLS certificate expire (registry RDAP), and do real visitors pass Core Web Vitals (PageSpeed Insights). Zero dependencies, Node 20+.",
+      "version": "1.0.0",
+      "category": "web",
+      "keywords": ["seo", "ai-crawlers", "gptbot", "robots-txt", "llms-txt", "domain-expiry", "ssl-expiry", "rdap", "core-web-vitals", "pagespeed"]
+    }
+  ]
+}
